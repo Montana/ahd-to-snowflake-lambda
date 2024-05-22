@@ -1,4 +1,4 @@
-// Wrote by Michael Mendy for Travis, CI GmbH (c) 2024. 
+// Wrote by Michael Mendy for Travis CI, GmbH (c) 2024. 
 
 use aws_lambda_events::event::cloudwatch_events::CloudWatchEvent;
 use aws_sdk_athena::model::QueryExecutionState;
