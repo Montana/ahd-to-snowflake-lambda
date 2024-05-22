@@ -1,6 +1,6 @@
 # Amazon Athena to Snowflake Data Transfer using AWS Lambda
 
-This repository provides an example implementation of transferring data from Amazon Athena to Snowflake using AWS Lambda. The Lambda function is written in Rust and utilizes the AWS SDK for Rust (`aws-sdk-rust`) and the Snowflake Connector for Rust (`snowflake-connector`) to execute Athena queries and load the results into Snowflake.
+This repository is an implementation of transferring data from Amazon Athena to Snowflake using AWS Lambda. The Lambda function is written in Rust and utilizes the AWS SDK for Rust (`aws-sdk-rust`) and the Snowflake Connector for Rust (`snowflake-connector`) to execute Athena queries and load the results into Snowflake.
 
 ## Prerequisites
 
