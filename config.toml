@@ -1,0 +1,14 @@
+[aws]
+region = "your_aws_region"
+
+[athena]
+database = "your_athena_database"
+output_location = "s3://your-bucket/path/"
+
+[snowflake]
+account = "your_snowflake_account"
+user = "your_snowflake_user"
+password = "your_snowflake_password"
+warehouse = "your_snowflake_warehouse"
+database = "your_snowflake_database"
+schema = "your_snowflake_schema"
