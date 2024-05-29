@@ -1,4 +1,4 @@
-trigger:
+ trigger:
 - master
 
 pool:
@@ -11,10 +11,19 @@ jobs:
     displayName: 'Step 1'
 
   - script: |
-      echo "Step 2: Running some tasks"
-      # Add your commands here
-      sleep 5
-    displayName: 'Step 2'
+      echo "Step 2: Running build tasks"
+      # Replace this with your actual build command
+      # Example for a Node.js project:
+      npm install
+      npm run build
+    displayName: 'Step 2: Build'
+    continueOnError: true
 
-  - script: echo "Step 3: Finishing up"
-    displayName: 'Step 3'
+  - script: |
+      echo "Step 3: Running additional tasks"
+      # Add your additional commands here
+      sleep 5
+    displayName: 'Step 3: Additional tasks'
+
+  - script: echo "Step 4: Finishing up"
+    displayName: 'Step 4'
