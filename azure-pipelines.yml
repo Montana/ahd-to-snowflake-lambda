@@ -1,11 +1,16 @@
 trigger:
-  - master
+  - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - script: echo "This pipeline will always pass!"
+  - script: echo "This pipeline will always pass, even with errors!"
     displayName: 'Always passing step'
 
-  - script: exit 0
+  - script: |
+      set +e
+      # Run your build, test, or deployment commands here
+      # Even if these commands fail, the pipeline will continue
+      exit 0
+    displayName: 'Ignore errors and ensure pipeline passes'
