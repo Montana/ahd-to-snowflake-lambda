@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-- job: AlwaysPassJob
+- job: SequentialJob
   steps:
   - script: echo "Step 1: Starting the pipeline"
     displayName: 'Step 1'
@@ -13,19 +13,8 @@ jobs:
   - script: |
       echo "Step 2: Running some tasks"
       # Add your commands here
-      # Example for a Node.js project:
-      npm install
-      npm run build
-    displayName: 'Step 2: Build'
-    continueOnError: true
-
-  - script: |
-      echo "Step 3: Running additional tasks"
-      # Add your additional commands here
       sleep 5
-    displayName: 'Step 3: Additional tasks'
-    continueOnError: true
+    displayName: 'Step 2'
 
-  - script: echo "Step 4: Finishing up"
-    displayName: 'Step 4'
-    continueOnError: true
+  - script: echo "Step 3: Finishing up"
+    displayName: 'Step 3'
