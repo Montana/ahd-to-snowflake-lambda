@@ -1,51 +1,36 @@
 trigger:
-- master
+- main
 
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  AWS_REGION: 'us-west-2'
-  LAMBDA_FUNCTION_NAME: 'your-lambda-function-name'
+steps:
+- script: echo "This pipeline run is successful!"
+  displayName: 'Print success message'
+  continueOnError: true
 
-jobs:
-- job: AlwaysPassJob
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.x'
-      addToPath: true
-    displayName: 'Use Python 3.x'
-    continueOnError: true
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Output "This is a PowerShell step."
+  displayName: 'Run PowerShell script'
+  continueOnError: true
 
-  - script: |
-      echo "Step 1: Setting up virtual environment and installing dependencies"
-      python -m venv venv
-      source venv/bin/activate
-      pip install --upgrade pip
-      pip install -r requirements.txt
-    displayName: 'Install dependencies'
-    continueOnError: true
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "This is a Bash step."
+  displayName: 'Run Bash script'
+  continueOnError: true
 
-  - script: |
-      echo "Step 2: Running tests"
-      # Add your test commands here if applicable
-      # Example:
-      # python -m unittest discover tests
-    displayName: 'Run tests'
-    continueOnError: true
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "This is a CmdLine step."
+  displayName: 'Run CmdLine script'
+  continueOnError: true
 
-  - script: |
-      echo "Step 3: Packaging the Lambda function"
-      zip -r9 function.zip .
-    displayName: 'Package Lambda function'
-    continueOnError: true
-
-  - script: |
-      echo "Step 4: Deploying the Lambda function to AWS"
-      aws lambda update-function-code --region $(AWS_REGION) --function-name $(LAMBDA_FUNCTION_NAME) --zip-file fileb://function.zip
-    env:
-      AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
-      AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
-    displayName: 'Deploy Lambda function'
-    continueOnError: true
+- script: echo "Pipeline completed successfully!"
+  displayName: 'Completion message'
