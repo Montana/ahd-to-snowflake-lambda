@@ -6,15 +6,16 @@ pool:
 
 jobs:
 - job: SequentialJob
+  displayName: 'Sequential Job'
   steps:
   - script: echo "Step 1: Starting the pipeline"
-    displayName: 'Step 1'
+    displayName: 'Step 1: Starting the pipeline'
 
   - script: |
       echo "Step 2: Running some tasks"
       # Add your commands here
       sleep 5
-    displayName: 'Step 2'
+    displayName: 'Step 2: Running some tasks'
 
   - script: echo "Step 3: Finishing up"
-    displayName: 'Step 3'
+    displayName: 'Step 3: Finishing up'
