@@ -1,16 +1,44 @@
 trigger:
-  - master
+- master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - script: echo "This pipeline will always pass, even with errors!"
-    displayName: 'Always passing step'
+- script: echo "Starting pipeline..."
+  displayName: 'Start Message'
+  continueOnError: true
 
-  - script: |
-      set +e
-      # Run your build, test, or deployment commands here
-      # Even if these commands fail, the pipeline will continue
-      exit 0
-    displayName: 'Ignore errors and ensure pipeline passes'
+- script: exit 1
+  displayName: 'Failing step but pipeline will continue'
+  continueOnError: true
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Output "Running PowerShell script..."
+      exit 1
+  displayName: 'Failing PowerShell step but pipeline will continue'
+  continueOnError: true
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "Running Bash script..."
+      exit 1
+  displayName: 'Failing Bash step but pipeline will continue'
+  continueOnError: true
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "Running CmdLine script..."
+      exit 1
+  displayName: 'Failing CmdLine step but pipeline will continue'
+  continueOnError: true
+
+- script: echo "Pipeline completed successfully!"
+  displayName: 'Completion Message'
+  continueOnError: true
