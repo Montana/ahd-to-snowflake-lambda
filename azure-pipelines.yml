@@ -20,4 +20,4 @@ jobs:
     displayName: 'Step 2: Running some tasks'
 
   - script: echo "Step 3: Finishing up"
-    displayName: 'Step 3: Finishing up'
+    displayName: 'Step 3: Finishing:
