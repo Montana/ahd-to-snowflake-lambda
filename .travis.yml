@@ -1,0 +1,3 @@
+dist: focal
+script: "echo Hello!"
+install: skip
