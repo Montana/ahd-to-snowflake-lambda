@@ -1,16 +1,14 @@
 trigger:
-  - master
+- master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: ubuntu-latest
 
 steps:
-  - script: echo "This pipeline will always pass, even with errors!"
-    displayName: 'Always passing step'
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
 
-  - script: |
-      set +e
-      # Run your build, test, or deployment commands here
-      # Even if these commands fail, the pipeline will continue
-      exit 0
-    displayName: 'Ignore errors and ensure pipeline passes'
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
