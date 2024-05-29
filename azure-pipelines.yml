@@ -4,41 +4,42 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo "Starting pipeline..."
-  displayName: 'Start Message'
-  continueOnError: true
+jobs:
+- job: BuildAndTest
+  displayName: Build and Test
+  steps:
+  - script: |
+      set -e
+      echo "Starting build process..."
+      # Example of installing dependencies
+      sudo apt-get update
+      sudo apt-get install -y make gcc
 
-- script: exit 1
-  displayName: 'Failing step but pipeline will continue'
-  continueOnError: true
+      echo "Building project..."
+      make all
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Output "Running PowerShell script..."
-      exit 1
-  displayName: 'Failing PowerShell step but pipeline will continue'
-  continueOnError: true
+      echo "Running tests..."
+      make test
+    displayName: 'Build and Test Project'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo "Running Bash script..."
-      exit 1
-  displayName: 'Failing Bash step but pipeline will continue'
-  continueOnError: true
+- job: Lint
+  displayName: Code Linting
+  steps:
+  - script: |
+      set -e
+      echo "Linting code..."
+      # Example of linting
+      sudo apt-get update
+      sudo apt-get install -y pylint
+      pylint **/*.py
+    displayName: 'Lint Code'
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo "Running CmdLine script..."
-      exit 1
-  displayName: 'Failing CmdLine step but pipeline will continue'
-  continueOnError: true
-
-- script: echo "Pipeline completed successfully!"
-  displayName: 'Completion Message'
-  continueOnError: true
+- job: Cleanup
+  displayName: Cleanup Environment
+  steps:
+  - script: |
+      set -e
+      echo "Cleaning up..."
+      # Cleanup commands
+      make clean
+    displayName: 'Cleanup'
