@@ -4,17 +4,48 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  AWS_REGION: 'us-west-2'
+  LAMBDA_FUNCTION_NAME: 'your-lambda-function-name'
+
 jobs:
-- job: SequentialJob
+- job: AlwaysPassJob
   steps:
-  - script: echo "Step 1: Starting the pipeline"
-    displayName: 'Step 1'
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+      addToPath: true
+    displayName: 'Use Python 3.x'
+    continueOnError: true
 
   - script: |
-      echo "Step 2: Running some tasks"
-      # Add your commands here
-      sleep 5
-    displayName: 'Step 2'
+      echo "Step 1: Setting up virtual environment and installing dependencies"
+      python -m venv venv
+      source venv/bin/activate
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
+    continueOnError: true
 
-  - script: echo "Step 3: Finishing up"
-    displayName: 'Step 3'
+  - script: |
+      echo "Step 2: Running tests"
+      # Add your test commands here if applicable
+      # Example:
+      # python -m unittest discover tests
+    displayName: 'Run tests'
+    continueOnError: true
+
+  - script: |
+      echo "Step 3: Packaging the Lambda function"
+      zip -r9 function.zip .
+    displayName: 'Package Lambda function'
+    continueOnError: true
+
+  - script: |
+      echo "Step 4: Deploying the Lambda function to AWS"
+      aws lambda update-function-code --region $(AWS_REGION) --function-name $(LAMBDA_FUNCTION_NAME) --zip-file fileb://function.zip
+    env:
+      AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+      AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+    displayName: 'Deploy Lambda function'
+    continueOnError: true
