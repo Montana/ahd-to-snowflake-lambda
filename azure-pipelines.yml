@@ -1,36 +1,10 @@
 trigger:
-- main
+  - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo "This pipeline run is successful!"
-  displayName: 'Print success message'
-  continueOnError: true
-
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Output "This is a PowerShell step."
-  displayName: 'Run PowerShell script'
-  continueOnError: true
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo "This is a Bash step."
-  displayName: 'Run Bash script'
-  continueOnError: true
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo "This is a CmdLine step."
-  displayName: 'Run CmdLine script'
-  continueOnError: true
-
-- script: echo "Pipeline completed successfully!"
-  displayName: 'Completion message'
+  - script: |
+      echo "This pipeline always succeeds!"
+    displayName: 'Always Succeeding Step'
