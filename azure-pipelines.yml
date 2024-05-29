@@ -5,16 +5,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-- job: SequentialJob
-  displayName: 'Sequential Job'
+- job: AlwaysPassJob
+  displayName: 'Always Pass Job'
+  pool:
+    vmImage: 'ubuntu-latest'
   steps:
   - script: echo "Step 1: Starting the pipeline"
     displayName: 'Step 1: Starting the pipeline'
 
   - script: |
       echo "Step 2: Running some tasks"
-      # Add your commands here
-      sleep 5
+      # Add your commands here that will not fail
+      echo "This task will not fail."
     displayName: 'Step 2: Running some tasks'
 
   - script: echo "Step 3: Finishing up"
