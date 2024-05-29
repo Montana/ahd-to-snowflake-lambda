@@ -1,14 +1,14 @@
 trigger:
-- master
+- main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
 - script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  displayName: 'Run a one-liner script'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+    echo "This is a simple pipeline."
+    echo "It will pass no matter what."
   displayName: 'Run a multi-line script'
