@@ -9,4 +9,3 @@ steps:
     displayName: 'Always passing step'
 
   - script: exit 0
-    displayName: 'Ensure pipeline passes'
