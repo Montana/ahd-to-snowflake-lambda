@@ -1,15 +1,20 @@
-
 trigger:
-- master
+- main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+- job: SequentialJob
+  steps:
+  - script: echo "Step 1: Starting the pipeline"
+    displayName: 'Step 1'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - script: |
+      echo "Step 2: Running some tasks"
+      # Add your commands here
+      sleep 5
+    displayName: 'Step 2'
+
+  - script: echo "Step 3: Finishing up"
+    displayName: 'Step 3'
