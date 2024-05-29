@@ -1,10 +1,8 @@
-trigger:
-  - main
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-  - script: |
-      echo "This pipeline always succeeds!"
-    displayName: 'Always Succeeding Step'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+  displayName: 'Run unit tests'
+- task: PublishTestResults@2
+  condition: failed()
